@@ -1,0 +1,86 @@
+.form {
+    display: flex;
+    justify-content: space-around;
+    width: 70vw;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #feeafa,#e7e9ff,#fbd5f3);
+    margin-top: 15vh;
+    height: 13vh;
+    align-items: center;
+    box-shadow: 4px 2px 15px 2px rgba(15, 7, 14, 0.16);
+    border-radius: 10px;
+}
+
+.form_item {
+    display: flex;
+    gap: 7px;
+}
+
+input {
+    height: 25px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+label {
+    font-weight: 500;
+}
+
+@media (max-width: 646px) {
+    /* стили для xs-устройств */
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        height: 27vh;
+        justify-content: left;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+  }
+
+  .english {
+    margin-left: 9vw;
+}
+
+.translation {
+    margin-left: 3vw
+  }
+}
+  @media (min-width: 647px) and (max-width: 840px) {
+    /* стили для sm-устройств */
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+        height: 25vh;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+  }
+
+  .english {
+    margin-left: 5vw;
+}
+
+.translation {
+    margin-left: 2vw;
+
+}
+}
+  @media (min-width: 840px) and (max-width: 1350px) {
+    /* стили для md-устройств */
+    .form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .english {
+        margin-left: 2.4vw;
+    }
+  }
+  @media (min-width: 1351px) {
+    /* стили для lg-устройств */
+  }
