@@ -17,7 +17,7 @@ function Table() {
         </thead>
         <tbody>
             {data.map((person)=> (
-            <TableRow key={person.id} {...person}/>))}
+            <TableRow rowData={person} key={person.id} />))}
         </tbody>
     </table>
   )
