@@ -27,8 +27,9 @@ thead {
 	padding: 5px;
 	border: none;
 	border-bottom: 5px solid #F2F8F8;
-    border-left: 1px solid #ddd;
+    /* border-left: 1px solid #ddd; */
 	border-right: 1px solid #dddddd;
+    width: 20vw;
 }
 
 .table_container tbody tr:nth-child(odd){
@@ -43,3 +44,8 @@ thead {
     gap: 5px;
     justify-content: center;
   }
+
+
+/* .table-row-input {
+    color: red;
+} */

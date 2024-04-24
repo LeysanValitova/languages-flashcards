@@ -1,0 +1,12 @@
+.cardSliderWrapper {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.CardSliderArrowLeft {
+    color: rgb(1, 1, 80);
+    /* background-color: aliceblue; */
+    width: 50px;
+}

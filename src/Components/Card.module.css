@@ -1,0 +1,32 @@
+.card {
+    background: linear-gradient(90deg, rgb(251, 244, 251) 30%, hsla(0, 0%, 100%, 1) 100%);
+    width: 230px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    box-shadow:  4px 4px 15px 3px rgba(209, 43, 98, 0.16);
+    margin: 0 auto;
+    margin-top: 10vh;
+    /* justify-content: center; */
+}
+
+.cardEnglish {
+    color: #000;
+    font-size: 25px;
+    font-weight: 500;
+    padding-top: 100px;
+}
+
+.cardTranscription {
+    color: gray;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.cardTranslation {
+    color: rgb(15, 169, 15);
+    font-size: 20px;
+    font-weight: 500;
+}
+

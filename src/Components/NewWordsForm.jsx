@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './NewWordsForm.module.css'
-import ButtonSave from './ButtonSave'
+import Button from './Button'
+import buttonStyles from './Button.module.css'
+
 
 function NewWords() {
   return (
@@ -19,7 +21,10 @@ function NewWords() {
         <label htmlFor="translation">Translation:</label>
         <input type="text" name='translation' placeholder='торт' className={styles.translation}/>
       </div>
-      <ButtonSave />
+      <Button
+      className={buttonStyles.buttonSave}
+      text = "Add"
+      />
     </form>
   )
 }

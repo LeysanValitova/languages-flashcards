@@ -1,17 +1,20 @@
 import React from 'react'
-// import ButtonEdit from './ButtonEdit'
-// import ButtonDelete from './ButtonDelete'
 import { useState } from 'react';
+import styles from './TableRow.module.css'
+import Button from './Button';
+import ButtonStyles from './Button.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrashCan, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 
 function TableRow({rowData}) {
-  const { id, name, city, profession} = rowData;
+  const { id, english, transcription, translation} = rowData;
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({
     id,
-    name,
-    city,
-    profession,
+    english,
+    transcription,
+    translation,
   });
 
   function handleClose() {
@@ -42,9 +45,10 @@ function TableRow({rowData}) {
       </td>
 
       <td>
-        <input
+        <input 
+          className={styles.tableRowInput}
           type='text'
-          value={value.name}
+          value={value.english}
           name={'name'}
           onChange={handleChange}
         />
@@ -52,8 +56,9 @@ function TableRow({rowData}) {
 
       <td>
         <input
+          className={styles.tableRowInput}
           type='text'
-          value={value.city}
+          value={value.transcription}
           name={'city'}
           onChange={handleChange}
         />
@@ -61,8 +66,9 @@ function TableRow({rowData}) {
 
       <td>
         <input
+          className={styles.tableRowInput}
           type='text'
-          value={value.profession}
+          value={value.translation}
           name={'profession'}
           onChange={handleChange}
         />
@@ -70,21 +76,35 @@ function TableRow({rowData}) {
 
 
         <td>
-            <button onClick={handleSave}>Save</button>
-            <button onClick={handleClose}>Close</button>
+            <Button
+            icon = {<FontAwesomeIcon icon={faCheck} size='lg' />}
+            className={ButtonStyles.buttonOk}
+            onClick={handleSave}/>
+            <Button
+            className={ButtonStyles.buttonCansel}
+            icon={<FontAwesomeIcon icon={faXmark} size='lg'/>}
+            onClick={handleClose}/>
         </td>
 
     </tr>
   ) : (
     <tr>
       <td>{id}</td>
-      <td>{value.name}</td>
-      <td>{value.city}</td>
-      <td>{value.profession}</td>
+      <td>{value.english}</td>
+      <td>{value.transcription}</td>
+      <td>{value.translation}</td>
       <td>
         <td>
-          <button onClick={handleEdit}>Edit</button>
-          <button>Delete</button>
+          <Button
+          onClick={handleEdit}
+          icon={<FontAwesomeIcon icon={faPen} />}
+          className={ButtonStyles.buttonEdit}
+          tooltip='Подсказка при наведении'
+          />
+          <Button
+          icon={<FontAwesomeIcon icon={faTrashCan}/>}
+          className={ButtonStyles.buttonDelete} 
+          />
         </td>
       </td>
     </tr>

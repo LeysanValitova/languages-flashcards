@@ -9,15 +9,15 @@ function Table() {
         <thead className={styles.table_nav}>
             <tr>
                 <th>№</th>
-                <th>Имя</th>
-                <th>Город</th>
-                <th>Профессия</th>
-                <th>Действия</th>
+                <th>English</th>
+                <th>Transcription</th>
+                <th>Translation</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {data.map((person)=> (
-            <TableRow rowData={person} key={person.id} />))}
+            {data.map((word)=> (
+            <TableRow rowData={word} key={word.id} />))}
         </tbody>
     </table>
   )

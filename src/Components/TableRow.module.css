@@ -1,0 +1,11 @@
+.tableRowInput {
+    height: 20px;
+    border-radius: 10;
+    border: 1px solid hsl(291, 61%, 36%);
+    text-align: center;
+    font-size: 15px;
+}
+
+.tableRowInput:focus {
+    border: 2px solid hsl(291, 61%, 36%) ;
+}

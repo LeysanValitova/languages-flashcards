@@ -1,7 +1,8 @@
 .navBox {
     background: linear-gradient(90deg, #efc3e6,#dee2ff,#feeafa);
     box-shadow: 8px 5px 12px 0px rgba(34, 60, 80, 0.14);
-    /* position: fixed; */
+    position: fixed;
+    top: 0;
     display: flex;
     align-items: center;
     gap: 13vw;
