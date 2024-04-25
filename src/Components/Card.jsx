@@ -6,19 +6,20 @@ import ButtonStyles from './Button.module.css'
 
 
 function Card({english, transcription, translation}) {
-const [selected, setSelected] = useState(false)
 
-const handleSelectedState = () => {
-    setSelected(!selected)
+    const [selected, setSelected] = useState(false)
+
+    const handleSelectedState = () => {
+        setSelected(!selected)
 }
 
-  return (
+    return (
     <div className={styles.card}>
         <div className={styles.cardEnglish}>
-            {english}Word
+            {english}
         </div>
         <div className={styles.cardTranscription}>
-            {transcription}[word]
+            {transcription}
         </div>
         
 
@@ -28,7 +29,7 @@ const handleSelectedState = () => {
             <div
              className={styles.cardTranslation}
              onClick={handleSelectedState}>
-            {translation}Слово
+            {translation}
         </div> 
             : 
             <Button

@@ -40,9 +40,9 @@ function TableRow({rowData}) {
   return isSelected ? (
     <tr>
 
-      <td>
+      
         <td>{id}</td>
-      </td>
+    
 
       <td>
         <input 

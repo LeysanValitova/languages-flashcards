@@ -10,3 +10,33 @@
     /* background-color: aliceblue; */
     width: 50px;
 }
+
+@keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .card {
+    animation-duration: 0.5s;
+  }
+  
+  .card-transition-left {
+    animation-name: slideInLeft;
+  }
+  
+  .card-transition-right {
+    animation-name: slideInRight;
+  }

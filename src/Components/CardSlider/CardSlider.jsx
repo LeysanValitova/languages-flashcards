@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import styles from './CardSlider.module.css'
 import Card from '../Card'
-import data from '../data.js'
+import data from '../../data'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
 
@@ -26,11 +26,14 @@ function CardSlider() {
         className={styles.CardSliderArrowLeft}
         onClick={showPrevious}/>
 
-       {data.map((word)=>{
-        return <Card rowData={word} key={word.id} />
-       }
-    )
-}
+       <Card
+        english={data[position].english}
+        transcription={data[position].transcription}
+        translation={data[position].translation}
+        className={position > 0 ? `${styles.card} ${styles['card-transition-left']}` : styles.card}
+        
+         />
+     
     
    
 
@@ -43,7 +46,7 @@ function CardSlider() {
 
     </div>
         <div className={styles.CardSliderCounter}>
-        {position}/{data.length}
+        {position+1}/{data.length}
         </div>
         </div>
   )
