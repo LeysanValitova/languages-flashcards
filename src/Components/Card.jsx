@@ -15,27 +15,31 @@ function Card({english, transcription, translation}) {
 
     return (
     <div className={styles.card}>
-        <div className={styles.cardEnglish}>
-            {english}
-        </div>
-        <div className={styles.cardTranscription}>
-            {transcription}
-        </div>
-        
 
         {
             selected 
             ? 
+            <div className={styles.cardBack}> 
+
             <div
              className={styles.cardTranslation}
              onClick={handleSelectedState}>
             {translation}
         </div> 
+            </div>
             : 
+            <div className={styles.cardFront}>
+            <div className={styles.cardEnglish}>
+                {english}
+            </div>
+            <div className={styles.cardTranscription}>
+                {transcription}
+            </div>
             <Button
-            className={ButtonStyles.buttonSave}
-            text='Check'
-            onClick={handleSelectedState}/>
+                className={ButtonStyles.buttonSave}
+                text='Check'
+                onClick={handleSelectedState}/>
+            </div>
         }
     </div>
   )

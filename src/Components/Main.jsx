@@ -9,7 +9,6 @@ function Main() {
     <div>
         <NewWordsForm/>
         <Table/>
-        <Card/>
         <CardSlider/>
     </div>
   )
