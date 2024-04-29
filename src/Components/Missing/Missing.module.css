@@ -1,0 +1,33 @@
+.missing {
+    display: flex;
+    width: 70vw;
+    padding-top: 5vh;
+    margin: 0 auto;
+}
+
+.missingContent {
+    width: 50%;
+  
+
+}
+
+.missingImg {
+    width: 80%;
+    /* box-shadow: 18px 17px 43px 7px rgba(34, 60, 80, 0.2); */
+}
+
+.missingTitle {
+    font-size: 130px;
+    font-weight: 900;
+}
+
+.missingSubtitle, .missingTextXl{
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.missingText {
+    font-size: 20px;
+    font-weight: 700;
+}
+

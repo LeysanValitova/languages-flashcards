@@ -1,15 +1,34 @@
 import React from 'react'
 import Table from './Table'
 import NewWordsForm from './NewWordsForm'
-import Card from './Card'
 import CardSlider from './CardSlider/CardSlider'
+import {Routes, Route } from 'react-router-dom';
+import Missing from './Missing/Missing';
+
 
 function Main() {
   return (
     <div>
-        <NewWordsForm/>
-        <Table/>
-        <CardSlider/>
+      <Routes>
+        <Route path='/table' element={
+          <div>
+            <NewWordsForm/>
+            <Table/>
+          </div>
+        }>
+       
+        </Route>
+        <Route
+        path='/game'
+        element={<CardSlider/>}
+        >
+        </Route>
+        <Route
+        path='*'
+        element={<Missing/>}>
+        </Route>
+       
+      </Routes>
     </div>
   )
 }
