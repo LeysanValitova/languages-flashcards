@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './NewWordsForm.module.css'
-import Button from './Button'
-import buttonStyles from './Button.module.css'
+import Button from '../Button/Button'
+import buttonStyles from '../Button/Button.module.css'
 
 
 function NewWords() {

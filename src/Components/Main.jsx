@@ -1,6 +1,6 @@
 import React from 'react'
-import Table from './Table'
-import NewWordsForm from './NewWordsForm'
+import Table from './Table/Table'
+import NewWordsForm from './NewWordsForm/NewWordsForm'
 import CardSlider from './CardSlider/CardSlider'
 import {Routes, Route } from 'react-router-dom';
 import Missing from './Missing/Missing';

@@ -1,14 +1,14 @@
 import React from 'react'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './Button.module.css'
 
 
-function Button({text, icon, onClick, className, tooltip}) {
+function Button({text, icon, onClick, className, tooltip, ref}) {
   return (
     <div>
         <button
         
         className={className}
+        ref={ref}
         onClick={onClick}>
             {text}
             {icon}

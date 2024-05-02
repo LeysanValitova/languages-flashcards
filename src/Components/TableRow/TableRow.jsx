@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import styles from './TableRow.module.css'
-import Button from './Button';
-import ButtonStyles from './Button.module.css'
+import Button from '../Button/Button';
+import ButtonStyles from '../Button/Button.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
