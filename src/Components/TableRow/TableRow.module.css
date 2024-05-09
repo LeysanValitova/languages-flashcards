@@ -9,3 +9,12 @@
 .tableRowInput:focus {
     border: 2px solid hsl(291, 61%, 36%) ;
 }
+
+.border_error {
+    border: 2px solid red;
+}
+
+.error_text {
+    color: red;
+    font-size: 13px;
+}

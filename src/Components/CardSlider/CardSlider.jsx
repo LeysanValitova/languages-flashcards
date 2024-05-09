@@ -9,9 +9,8 @@ import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-i
 function CardSlider() {
     const [position, setPosition] = useState(0);
     const [learnedWords, setLearnedWord] = useState(0);
-    
-    
-    
+
+
     const countLearnedWords = () => {
         setLearnedWord(learnedWords + 1)
     }

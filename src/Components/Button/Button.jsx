@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styles from './Button.module.css'
 
 
-function Button({text, icon, onClick, className, tooltip, ref}) {
+const Button = forwardRef(({text, icon, onClick, className, tooltip, disabled}, ref) => {
+
+
   return (
     <div>
         <button
         
         className={className}
         ref={ref}
-        onClick={onClick}>
+        onClick={onClick}
+        disabled={disabled}>
             {text}
             {icon}
         </button>
-         <span className={styles.tooltip}>{tooltip}</span>
+        <span className={styles.tooltip}>{tooltip}</span>
     </div>
       )
 }
+)
 
 export default Button

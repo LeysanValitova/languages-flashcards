@@ -16,24 +16,48 @@ function TableRow({rowData}) {
     transcription,
     translation,
   });
+  // валидация
+  const [errors, setErrors] =useState({
+    english: false,
+    transcription:false,
+    translation:false,
+  })
 
+  const disabledBtn = Object.values(errors).some((item) => item)
+
+  // закрытие формы редактирования
   function handleClose() {
     setIsSelected(!isSelected);
     setValue({ ...rowData });
   }
+
+// сохранение отредактированной формы
   function handleSave() {
+    if(value.english.match(/[а-яА-ЯёЁ]/g) ) {
+      setErrors({...errors, english: "use English letters"})
+    } else if(value.transcription.match(/[а-яА-ЯёЁ]/g)) {
+      setErrors({...errors, transcription: "use English letters"})
+    } else if(value.translation.match(/[a-zA-Z]/g)) {
+      setErrors({...errors, translation: "use Russian letters"})
+    } else {
     setValue({...value});
     setIsSelected(!isSelected);
+    console.log(Object.values(value))
+    }
   }
 
+  // отмена редактирования
   function handleEdit() {
     setIsSelected(!isSelected);
   }
 
+  // редактирование полей
   function handleChange(event) {
     setValue((prevValue) => {
       return { ...prevValue, [event.target.name]: event.target.value };
     });
+    // валидация на пустую строку
+    setErrors({...errors, [event.target.name] : event.target.value.trim() === "" ? true: false})
   }
 
 
@@ -46,32 +70,36 @@ function TableRow({rowData}) {
 
       <td>
         <input 
-          className={styles.tableRowInput}
+          className={errors.english ? `${styles.border_error} ${styles.tableRowInput}` : styles.tableRowInput}
           type='text'
           value={value.english}
-          name={'name'}
+          name={'english'}
           onChange={handleChange}
         />
+        <p className={styles.error_text}>{errors.english && errors.english}</p>
       </td>
 
       <td>
         <input
-          className={styles.tableRowInput}
+          className={errors.transcription? `${styles.border_error} ${styles.tableRowInput}` : styles.tableRowInput}
           type='text'
           value={value.transcription}
-          name={'city'}
+          name={'transcription'}
           onChange={handleChange}
         />
+        <p className={styles.error_text}>{errors.transcription && errors.transcription}</p>
       </td>
 
       <td>
         <input
-          className={styles.tableRowInput}
+          className={errors.translation? `${styles.border_error} ${styles.tableRowInput}` : styles.tableRowInput}
           type='text'
           value={value.translation}
-          name={'profession'}
+          name={'translation'}
           onChange={handleChange}
         />
+        <p className={styles.error_text}>{errors.translation && errors.translation}</p>
+
       </td>
 
 
@@ -79,7 +107,8 @@ function TableRow({rowData}) {
             <Button
             icon = {<FontAwesomeIcon icon={faCheck} size='lg' />}
             className={ButtonStyles.buttonOk}
-            onClick={handleSave}/>
+            onClick={handleSave}
+            disabled={disabledBtn}/>
             <Button
             className={ButtonStyles.buttonCansel}
             icon={<FontAwesomeIcon icon={faXmark} size='lg'/>}
