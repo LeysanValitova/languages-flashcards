@@ -10,12 +10,12 @@ class WordsStore {
         makeAutoObservable(this)
     }
 
-    add = async(value) => {
+    handleAdd = async(value) => {
         this.isLoading = true;
 
 
 const newWord = {
-            id: [this.words.length-1].id + 1,
+            id: this.words.length + 1,
             english: value.english,
             transcription: value.transcription,
             russian: value.russian,
@@ -23,7 +23,7 @@ const newWord = {
             tags_json: []
         }
         try {
-            const response = await fetch('http://itgirlschool.justmakeit.ru/api/words', {
+            const response = await fetch('http://sandbox.itgirlschool.ru/api/words/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -34,17 +34,17 @@ const newWord = {
             if(response.ok) {
                 return response.json()
             }
-    
+            this.loadData()
             this.isLoading = false;
-            this.words.push(newWord)
+            this.words.push(newWord);
         } catch (error) {
             console.error(error);
                             }
     }
 
-    remove = (index) => {
-        this.words.splice(index, 1)
-    }
+    // remove = (index) => {
+    //     this.words.splice(index, 1)
+    // }
 
     loadData = async() => {
         try {
