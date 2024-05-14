@@ -1,43 +1,47 @@
-import { makeAutoObservable } from "mobx";
+
+import { makeAutoObservable, observable } from "mobx";
 
 export class WordsStore {
-    words = [];
+    @observable words = [];
     isLoaded = false;
     isLoading = false;
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this, {
+            words: observable
+        })
     }
 
-    addWord = async(wordData) => {
+    add = async(value) => {
         this.isLoading = true;
 
-        // const newWord = {
-        //     id: this.words.length + 1,
-        //     english: value.english,
-        //     transcription: value.transcription,
-        //     russian: value.russian,
-        //     tags: '',
-        //     tags_json: []
-        // }
+
+const newWord = {
+            id: [this.words.length-1].id + 1,
+            english: value.english,
+            transcription: value.transcription,
+            russian: value.russian,
+            tags: '',
+            tags_json: []
+        }
         try {
             const response = await fetch('http://itgirlschool.justmakeit.ru/api/words', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify(wordData)
+                body: JSON.stringify(newWord)
             });
     
             if(response.ok) {
-                this.fetchDataFromServer()
+                return response.json()
             }
     
             this.isLoading = false;
-            this.words.push(wordData)
+            this.words.push(newWord)
         } catch (error) {
             console.error(error);
-            this.isLoading = false;                }
+                            }
     }
 
     remove = (index) => {

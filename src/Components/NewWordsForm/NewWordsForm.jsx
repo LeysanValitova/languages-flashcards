@@ -1,32 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './NewWordsForm.module.css'
 import Button from '../Button/Button'
 import buttonStyles from '../Button/Button.module.css'
+import { inject, observer } from 'mobx-react'
 
 
-function NewWords() {
+function NewWords({wordsStore, id, english, transcription, russian}) {
+  const  {add} = wordsStore;
+
+  const [value, setValue] = useState({
+        id,
+        english,
+        transcription,
+        russian,
+  })
+
+  const onAdd = (value) => {
+    add({english: value.english,
+        transcription: value.transcription,
+        russian: value.russian,
+        tags: '',
+        tags_json: []
+    })
+    setValue({...value});
+  }
   return (
     <form className={styles.form}>
       <div className={styles.form_item}>
         <label htmlFor="english">English:</label>
-        <input type="text" name='english' placeholder='cake' className={styles.english}/>
+        <input type="text" name='english' value={value.english} placeholder='cake' className={styles.english}/>
       </div>
       {/*  */}
       <div className={styles.form_item}>
         <label htmlFor="transcription">Transcription:</label>
-        <input type="text" name='transcription' placeholder='[keik]' />
+        <input type="text" name='transcription' value={value.transcription} placeholder='[keik]' />
       </div>
       {/*  */}
       <div className={styles.form_item}>
-        <label htmlFor="translation">Translation:</label>
-        <input type="text" name='translation' placeholder='торт' className={styles.translation}/>
+        <label htmlFor="russian">Translation:</label>
+        <input type="text" name='russian' value={value.russian} placeholder='торт' className={styles.translation}/>
       </div>
       <Button
       className={buttonStyles.buttonSave}
+      onclick={onAdd}
       text = "Add"
       />
     </form>
   )
 }
 
-export default NewWords
+export default inject('wordsStore')(observer(NewWords));
