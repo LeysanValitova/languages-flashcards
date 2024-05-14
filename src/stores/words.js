@@ -1,15 +1,13 @@
 
-import { makeAutoObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 
-export class WordsStore {
-    @observable words = [];
+class WordsStore {
+    words = [];
     isLoaded = false;
     isLoading = false;
 
     constructor() {
-        makeAutoObservable(this, {
-            words: observable
-        })
+        makeAutoObservable(this)
     }
 
     add = async(value) => {
@@ -62,3 +60,5 @@ const newWord = {
                             }
     }
 }
+
+export default WordsStore

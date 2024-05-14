@@ -1,30 +1,37 @@
 import React from 'react'
-import { useState,} from 'react'
+import { useState,useEffect} from 'react'
 import styles from './CardSlider.module.css'
 import Card from '../Card/Card'
-import data from '../../data'
+import { inject, observer } from 'mobx-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
 
-function CardSlider() {
-    const [position, setPosition] = useState(0);
-    const [learnedWords, setLearnedWord] = useState(0);
+function CardSlider({wordsStore}) {
+    const {words, isLoaded, loadData} = wordsStore;
 
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
-    const countLearnedWords = () => {
-        setLearnedWord(learnedWords + 1)
+  const [position, setPosition] = useState(0);
+  const [learnedWords, setLearnedWord] = useState(0);
+  
+  
+  const countLearnedWords = () => {
+      setLearnedWord(learnedWords + 1)
     }
     
     
     function showPrevious() {
-        position === 0 ? setPosition(data.length-1) : setPosition(position-1)
+        position === 0 ? setPosition(words.length-1) : setPosition(position-1)
     }
     
     function showNext() {
-        position === data.length-1? setPosition(0) :  setPosition(position+1)
+        position === words.length-1? setPosition(0) :  setPosition(position+1)
     }
-
-
+    
+    
+    if (!isLoaded) { return <div>Loading...</div>;}
     return (
         <React.Fragment>
     <div>
@@ -37,9 +44,9 @@ function CardSlider() {
 
 
     <Card
-        english={data[position].english}
-        transcription={data[position].transcription}
-        translation={data[position].translation}
+        english={words[position].english}
+        transcription={words[position].transcription}
+        russian={words[position].russian}
         className={position > 0 ? `${styles.card} ${styles['card-transition-left']}` : styles.card}
         countLearnedWords={countLearnedWords}
         />
@@ -52,7 +59,7 @@ function CardSlider() {
 
     </div>
         <div className={styles.CardSliderCounter}>
-        {position+1}/{data.length}
+        {position+1}/{words.length}
         </div>
         </div>
         <p>Выучено слов: {learnedWords} </p>
@@ -62,4 +69,4 @@ function CardSlider() {
 
 
 
-export default CardSlider
+export default inject('wordsStore')(observer(CardSlider)); 

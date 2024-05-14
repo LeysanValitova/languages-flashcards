@@ -3,7 +3,7 @@ import styles from './Card.module.css'
 import Button from '../Button/Button'
 import ButtonStyles from '../Button/Button.module.css'
 
-const Card = (({english, transcription, translation, countLearnedWords}) => {
+const Card = (({english, transcription, russian, countLearnedWords}) => {
 const [selected, setSelected] = useState(false)
 const [counted, setCounted] = useState(false)
 
@@ -33,7 +33,7 @@ return (
 className={styles.cardTranslation}
 onClick={handleSelectedState}
 >
-{translation}
+{russian}
 </div>
 ) : (
 <div className={styles.cardEnglish}>

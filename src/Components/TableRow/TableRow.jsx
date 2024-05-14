@@ -8,19 +8,19 @@ import { faPen, faTrashCan, faCheck, faXmark } from '@fortawesome/free-solid-svg
 
 
 function TableRow({rowData}) {
-  const { id, english, transcription, translation} = rowData;
+  const { id, english, transcription, russian} = rowData;
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({
     id,
     english,
     transcription,
-    translation,
+    russian,
   });
   // валидация
   const [errors, setErrors] =useState({
     english: false,
     transcription:false,
-    translation:false,
+    russian:false,
   })
 
   const disabledBtn = Object.values(errors).some((item) => item)
@@ -37,8 +37,8 @@ function TableRow({rowData}) {
       setErrors({...errors, english: "use English letters"})
     } else if(value.transcription.match(/[а-яА-ЯёЁ]/g)) {
       setErrors({...errors, transcription: "use English letters"})
-    } else if(value.translation.match(/[a-zA-Z]/g)) {
-      setErrors({...errors, translation: "use Russian letters"})
+    } else if(value.russian.match(/[a-zA-Z]/g)) {
+      setErrors({...errors, russian: "use Russian letters"})
     } else {
     setValue({...value});
     setIsSelected(!isSelected);
@@ -92,13 +92,13 @@ function TableRow({rowData}) {
 
       <td>
         <input
-          className={errors.translation? `${styles.border_error} ${styles.tableRowInput}` : styles.tableRowInput}
+          className={errors.russian? `${styles.border_error} ${styles.tableRowInput}` : styles.tableRowInput}
           type='text'
-          value={value.translation}
-          name={'translation'}
+          value={value.russian}
+          name={'russian'}
           onChange={handleChange}
         />
-        <p className={styles.error_text}>{errors.translation && errors.translation}</p>
+        <p className={styles.error_text}>{errors.russian && errors.russian}</p>
 
       </td>
 
@@ -121,7 +121,7 @@ function TableRow({rowData}) {
       <td>{id}</td>
       <td>{value.english}</td>
       <td>{value.transcription}</td>
-      <td>{value.translation}</td>
+      <td>{value.russian}</td>
       <td>
         <td>
           <Button

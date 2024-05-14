@@ -5,13 +5,13 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import WordsStore from './stores/words';
 import {Provider} from 'mobx-react'
 
-const store = {
-  wordstore: new WordsStore()
-}
+
+const wordsStore = new WordsStore()
+
 
 function App() {
   return (
-    <Provider {...store}>
+    <Provider wordsStore={wordsStore}>
     <Router>
     <div>
       <Header/>
