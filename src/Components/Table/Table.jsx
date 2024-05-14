@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './Table.module.css'
-import data from '../../data'
 import TableRow from '../TableRow/TableRow'
 
 function Table() {
