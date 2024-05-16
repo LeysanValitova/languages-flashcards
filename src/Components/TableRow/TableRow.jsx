@@ -5,10 +5,15 @@ import Button from '../Button/Button';
 import ButtonStyles from '../Button/Button.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { inject, observer } from 'mobx-react'
 
 
-function TableRow({rowData}) {
+
+function TableRow({rowData, wordsStore}) {
   const { id, english, transcription, russian} = rowData;
+
+  const {deleteWord, updateWord} = wordsStore;
+
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({
     id,
@@ -32,7 +37,7 @@ function TableRow({rowData}) {
   }
 
 // сохранение отредактированной формы
-  function handleSave() {
+  function handleSave(updatedWord) {
     if(value.english.match(/[а-яА-ЯёЁ]/g) ) {
       setErrors({...errors, english: "use English letters"})
     } else if(value.transcription.match(/[а-яА-ЯёЁ]/g)) {
@@ -43,12 +48,15 @@ function TableRow({rowData}) {
     setValue({...value});
     setIsSelected(!isSelected);
     console.log(Object.values(value))
+    console.log(updatedWord);
+    updateWord(updatedWord);
     }
   }
 
-  // отмена редактирования
+  // изменение слов
   function handleEdit() {
     setIsSelected(!isSelected);
+
   }
 
   // редактирование полей
@@ -60,6 +68,12 @@ function TableRow({rowData}) {
     setErrors({...errors, [event.target.name] : event.target.value.trim() === "" ? true: false})
   }
 
+
+
+  // удаление слова
+  const handleDeleteWord = (id) => {
+    deleteWord(id);
+  };
 
   return isSelected ? (
     <tr>
@@ -132,7 +146,8 @@ function TableRow({rowData}) {
           />
           <Button
           icon={<FontAwesomeIcon icon={faTrashCan}/>}
-          className={ButtonStyles.buttonDelete} 
+          className={ButtonStyles.buttonDelete}
+          onClick={() => handleDeleteWord(id)}
           />
         </td>
       </td>
@@ -140,4 +155,4 @@ function TableRow({rowData}) {
   )
 }
 
-export default TableRow
+export default inject('wordsStore')(observer(TableRow)); 

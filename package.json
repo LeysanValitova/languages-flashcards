@@ -162,5 +162,5 @@
     "@babel/plugin-proposal-decorators": "^7.24.1",
     "@babel/preset-env": "^7.24.5"
   },
-  "proxy": "<http://itgirlschool.justmakeit.ru>"
+  "proxy": "http://itgirlschool.justmakeit.ru"
 }
