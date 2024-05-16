@@ -10,7 +10,7 @@ const [counted, setCounted] = useState(false)
 const ref = useRef();
  
 useEffect(() => ref.current.focus());
-console.log(selected);
+
 
 const handleSelectedState = () => {
 setSelected(!selected)

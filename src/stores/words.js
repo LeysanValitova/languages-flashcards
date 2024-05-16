@@ -11,10 +11,13 @@ class WordsStore {
     }
 
    
-
+// метод удаления слов 
     // remove = (index) => {
     //     this.words.splice(index, 1)
     // }
+
+
+    //метод для получения слов с сервера 
 
     loadData = async() => {
         try {
@@ -30,6 +33,7 @@ class WordsStore {
                             }
     }
 
+    // метод отправки новых слов
     handleAdd = async(value) => {
         this.isLoading = true;
 
@@ -43,7 +47,7 @@ const newWord = {
             tags_json: []
         }
         try {
-            const response = await fetch('http://sandbox.itgirlschool.ru/api/words/add', {
+            const response = await fetch('http://itgirlschool.justmakeit.ru/api/words[/add]', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'

@@ -17,21 +17,23 @@ function NewWords({wordsStore, id, english, transcription, russian}) {
 
   const handleAddWord = (e) => {
   e.preventDefault();
-  // проверка на пустоту
-if(value.trim()===''){return}
+
     handleAdd(value)
     setValue('');
     console.log(value)
   }
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setValue(value)
-    console.log(value)
-  }
+    const { name, value: newWord } = e.target;
+    console.log(name, newWord);
+    setValue({
+    ...value,
+    [name]: newWord,
+    });
+    }
 
   return (
-    <form className={styles.form} onSubmit={handleAddWord}>
+    <form className={styles.form} >
       <div className={styles.form_item}>
         <label htmlFor="english">English:</label>
         <input type="text" name='english' value={value.english} onChange={handleChange} placeholder='cake' className={styles.english}/>
@@ -48,7 +50,7 @@ if(value.trim()===''){return}
       </div>
       <Button
       className={buttonStyles.buttonSave}
-      type = "submit"
+      onClick = {handleAddWord}
       text = "Add"
       />
     </form>
