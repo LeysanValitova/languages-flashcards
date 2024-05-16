@@ -10,6 +10,26 @@ class WordsStore {
         makeAutoObservable(this)
     }
 
+   
+
+    // remove = (index) => {
+    //     this.words.splice(index, 1)
+    // }
+
+    loadData = async() => {
+        try {
+            if (this.isLoaded &&this.isLoading) {return}
+            this.isLoading = true;
+            const response = await fetch('http://itgirlschool.justmakeit.ru/api/words');
+            const data = await response.json();
+            this.isLoading = false;
+            this.words = data
+            this.isLoaded = true
+            } catch (error) {
+            console.error(error);
+                            }
+    }
+
     handleAdd = async(value) => {
         this.isLoading = true;
 
@@ -38,24 +58,6 @@ const newWord = {
             this.isLoading = false;
             this.words.push(newWord);
         } catch (error) {
-            console.error(error);
-                            }
-    }
-
-    // remove = (index) => {
-    //     this.words.splice(index, 1)
-    // }
-
-    loadData = async() => {
-        try {
-            if (this.isLoaded &&this.isLoading) {return}
-            this.isLoading = true;
-            const response = await fetch('http://itgirlschool.justmakeit.ru/api/words');
-            const data = await response.json();
-            this.isLoading = false;
-            this.words = data
-            this.isLoaded = true
-            } catch (error) {
             console.error(error);
                             }
     }

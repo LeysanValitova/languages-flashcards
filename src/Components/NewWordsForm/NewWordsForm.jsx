@@ -19,16 +19,15 @@ function NewWords({wordsStore, id, english, transcription, russian}) {
   e.preventDefault();
   // проверка на пустоту
 if(value.trim()===''){return}
- 
     handleAdd(value)
-
     setValue('');
+    console.log(value)
   }
 
   const handleChange = (e) => {
     const value = e.target.value;
     setValue(value)
-
+    console.log(value)
   }
 
   return (

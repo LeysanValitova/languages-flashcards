@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import styles from './Button.module.css'
 
 
-const Button = forwardRef(({text, icon, onClick, className, tooltip, disabled}, ref) => {
+const Button = forwardRef(({text, icon, onClick, className, tooltip, disabled, type}, ref) => {
 
 
   return (
@@ -12,6 +12,7 @@ const Button = forwardRef(({text, icon, onClick, className, tooltip, disabled}, 
         className={className}
         ref={ref}
         onClick={onClick}
+        type= {type}
         disabled={disabled}>
             {text}
             {icon}
