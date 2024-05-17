@@ -9,10 +9,11 @@ import { inject, observer } from 'mobx-react'
 
 
 
+
 function TableRow({rowData, wordsStore}) {
   const { id, english, transcription, russian} = rowData;
 
-  const {deleteWord, updateWord} = wordsStore;
+  const {deleteWord, updateWord,} = wordsStore;
 
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({
@@ -35,9 +36,14 @@ function TableRow({rowData, wordsStore}) {
     setIsSelected(!isSelected);
     setValue({ ...rowData });
   }
+  
+  const handleUpdateWord = (updatedWord) => {
+    console.log(updatedWord);
+    updateWord(updatedWord);
+  };
 
 // сохранение отредактированной формы
-  function handleSave(updatedWord) {
+  function handleCheck() {
     if(value.english.match(/[а-яА-ЯёЁ]/g) ) {
       setErrors({...errors, english: "use English letters"})
     } else if(value.transcription.match(/[а-яА-ЯёЁ]/g)) {
@@ -48,10 +54,15 @@ function TableRow({rowData, wordsStore}) {
     setValue({...value});
     setIsSelected(!isSelected);
     console.log(Object.values(value))
-    console.log(updatedWord);
-    updateWord(updatedWord);
     }
   }
+
+  function handleSave() {
+    handleUpdateWord(value)
+    handleCheck()
+  }
+
+
 
   // изменение слов
   function handleEdit() {

@@ -1,14 +1,26 @@
 
 import { makeAutoObservable } from "mobx";
+import ErrorComponent from "../Components/ErrorComponent/Error";
 
 class WordsStore {
     words = [];
     isLoaded = false;
     isLoading = false;
+    error = '';
 
     constructor() {
         makeAutoObservable(this)
     }
+    
+        // метод для установки ошибки
+        setError = (errorMessage) => {
+          this.error = errorMessage;
+      }
+  
+      // метод для сброса ошибки
+      clearError = () => {
+          this.error = '';
+      }
 
 
     //метод для получения слов с сервера 
@@ -23,7 +35,7 @@ class WordsStore {
             this.words = data
             this.isLoaded = true
             } catch (error) {
-            console.error(error);
+            // <ErrorComponent/>
                             }
     }
 
@@ -41,12 +53,13 @@ class WordsStore {
         }
         this.loadData()
         this.isLoading = false;
-        this.words.push(newWord);;
+        this.words = this.words.push(newWord);
       };
             
 
     // метод изменения слов
     updateWord = async (updatedWord) => {
+      
         const response = await fetch(`/api/words/${updatedWord.id}/update`, {
           method: "POST",
           headers: {
@@ -55,7 +68,8 @@ class WordsStore {
           body: JSON.stringify(updatedWord),
         });
         const data = await response.json();
-       this.words = this.words.map((word) => (word.id === updatedWord.id ? data : word));
+        console.log(data)
+      // this.words.map((word) => (word.id === updatedWord.id ? data : word));
       };
     
     // метод удаления слов
