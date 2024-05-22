@@ -1,59 +1,55 @@
-import React, { useRef,useEffect, useState} from 'react'
-import styles from './Card.module.css'
-import Button from '../Button/Button'
-import ButtonStyles from '../Button/Button.module.css'
+import React, { useRef, useEffect} from "react";
+import styles from "./Card.module.css";
+import Button from "../Button/Button";
+import ButtonStyles from "../Button/Button.module.css";
 
-const Card = (({english, transcription, russian, countLearnedWords}) => {
-const [selected, setSelected] = useState(false)
-const [counted, setCounted] = useState(false)
-
-const ref = useRef();
- 
-useEffect(() => ref.current.focus());
+const Card = ({ english, transcription, russian, countLearnedWords, selected, setSelected, showRussian, setShowRussian}) => {
+   
+    const ref = useRef();
 
 
-const handleSelectedState = () => {
-setSelected(!selected)
-if(!counted) {
-setCounted(true)
-countLearnedWords()
-}
+  
+    useEffect(() => ref.current.focus(), []);
+  
+    const checkCount = () => {
+      countLearnedWords();
+    };
+  
 
-}
+    function handleSelect() {
+        setSelected(!selected);
+        setShowRussian(false); 
+        setTimeout(() => setShowRussian(true), 1000); 
+    }
 
-
-
-return (
-<div className={styles.card}>
-
-{
-<div className={selected ? styles.cardBack : styles.cardFront}>
-{selected ? (
-<div
-className={styles.cardTranslation}
-onClick={handleSelectedState}
->
-{russian}
-</div>
-) : (
-<div className={styles.cardEnglish}>
-{english}
-</div>
-)}
-
-<div className={styles.cardTranscription}>
-{transcription}
-</div>
-<Button
-className={ButtonStyles.buttonSave}
-text='Check'
-onClick={handleSelectedState}
-ref={ref}
-/>
-</div>
-}
-</div>
-)
-})
-
-export default Card
+    const handleSelectedState = () => {
+    handleSelect() 
+    checkCount();
+    };
+  
+  
+  
+    return (
+      <div className={styles.wrapper}>
+        <div className={`${styles.card} ${selected ? styles.cardSelected : ""}`}>
+          <div className={styles.front}>
+            <div className={styles.cardEnglish}>{english}</div>
+            <div className={styles.cardTranscription}>{transcription}</div>
+            <Button
+              className={ButtonStyles.buttonSave}
+              text="Check"
+              onClick={handleSelectedState}
+              ref={ref}
+            />
+          </div>
+          <div className={styles.back}>
+            <div className={styles.cardTranslation} onClick={handleSelect}>
+            {showRussian && russian} 
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
+  export default Card;

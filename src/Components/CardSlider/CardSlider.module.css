@@ -41,4 +41,6 @@
     animation-name: slideInRight;
   }
 
- 
+.CardSliderCounter {
+  margin-top: 2vh;
+}

@@ -15,11 +15,24 @@ function CardSlider({wordsStore}) {
 
   const [position, setPosition] = useState(0);
   const [learnedWords, setLearnedWord] = useState(0);
+  const [counted, setCounted] = useState(false);
+  const [showRussian, setShowRussian] = useState(false);
+  const [selected, setSelected] = useState(false);
   
-  
+  const handleSelect = () => {
+    setSelected(!selected);
+  };
+
+
+
   const countLearnedWords = () => {
-      setLearnedWord(learnedWords + 1)
+    if (!counted) { 
+        setLearnedWord(learnedWords + 1);
+        setCounted(true); 
+        handleSelect()
     }
+}
+
     
     
     function showPrevious() {
@@ -28,6 +41,9 @@ function CardSlider({wordsStore}) {
     
     function showNext() {
         position === words.length-1? setPosition(0) :  setPosition(position+1)
+        setCounted(false);
+        setSelected(false);
+        setShowRussian(false); 
     }
     
     
@@ -49,7 +65,12 @@ function CardSlider({wordsStore}) {
         russian={words[position].russian}
         className={position > 0 ? `${styles.card} ${styles['card-transition-left']}` : styles.card}
         countLearnedWords={countLearnedWords}
+        selected = {selected}
+        setSelected={setSelected}
+        showRussian={showRussian}
+        setShowRussian={setShowRussian}
         />
+
         <FontAwesomeIcon
         icon={faArrowRightLong}
         size='2xl'

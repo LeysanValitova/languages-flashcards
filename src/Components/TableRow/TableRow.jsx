@@ -13,7 +13,7 @@ import { inject, observer } from 'mobx-react'
 function TableRow({rowData, wordsStore}) {
   const { id, english, transcription, russian} = rowData;
 
-  const {deleteWord, updateWord,} = wordsStore;
+  const {deleteWord, updateWord} = wordsStore;
 
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({
@@ -58,7 +58,7 @@ function TableRow({rowData, wordsStore}) {
   }
 
   function handleSave() {
-    handleUpdateWord(value)
+    handleUpdateWord(value.id)
     handleCheck()
   }
 

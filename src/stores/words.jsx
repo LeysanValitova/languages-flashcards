@@ -48,28 +48,28 @@ class WordsStore {
           },
           body: JSON.stringify(newWord),
         });
+
         if(response.ok) {
-            return response.json()
-        }
-        this.loadData()
-        this.isLoading = false;
-        this.words = this.words.push(newWord);
+          this.loadData()
+          this.isLoading = false;
+          this.words.push(newWord);
+          return response.json()
+          }
       };
             
 
     // метод изменения слов
-    updateWord = async (updatedWord) => {
-      
-        const response = await fetch(`/api/words/${updatedWord.id}/update`, {
+    updateWord = async (id) => {
+      console.log(id)
+        const response = await fetch(`/api/words/${id}/update`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(updatedWord),
+          body: JSON.stringify(id),
         });
         const data = await response.json();
-        console.log(data)
-      // this.words.map((word) => (word.id === updatedWord.id ? data : word));
+        this.words = this.words.map((word) => (word.id === id ? data : word));
       };
     
     // метод удаления слов
