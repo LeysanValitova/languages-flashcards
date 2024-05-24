@@ -58,7 +58,7 @@ function TableRow({rowData, wordsStore}) {
   }
 
   function handleSave() {
-    handleUpdateWord(value.id)
+    handleUpdateWord(value)
     handleCheck()
   }
 
@@ -67,7 +67,6 @@ function TableRow({rowData, wordsStore}) {
   // изменение слов
   function handleEdit() {
     setIsSelected(!isSelected);
-
   }
 
   // редактирование полей

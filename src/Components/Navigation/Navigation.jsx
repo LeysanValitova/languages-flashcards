@@ -6,9 +6,8 @@ function Navigation() {
   return (
     <div className={style.navBox}>
 
-        <Link to={'/'} className={style.logo}>PerfectEnglish</Link>
+        <Link to={'/table'} className={style.logo}>PerfectEnglish</Link>
         <nav className={style.nav}>
-            <Link to='/'>Home</Link>
             <Link to='/table'>Table</Link>
             <Link to='/game'>Game</Link>
         </nav>

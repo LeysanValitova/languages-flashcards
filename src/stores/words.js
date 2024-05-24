@@ -1,6 +1,6 @@
 
 import { makeAutoObservable } from "mobx";
-import ErrorComponent from "../Components/ErrorComponent/Error";
+// import ErrorComponent from "../Components/ErrorComponent/Error";
 
 class WordsStore {
     words = [];
@@ -59,18 +59,28 @@ class WordsStore {
             
 
     // метод изменения слов
-    updateWord = async (id) => {
-      console.log(id)
-        const response = await fetch(`/api/words/${id}/update`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(id),
-        });
-        const data = await response.json();
-        this.words = this.words.map((word) => (word.id === id ? data : word));
+    updateWord = async (updatedWord) => {
+      const { id, english, transcription, russian } = updatedWord;
+      const updatedData = {
+        id: id,
+        english: english,
+        transcription: transcription,
+        russian: russian,
+        tags: '',
+        tags_json: ''
       };
+    
+      const response = await fetch(`/api/words/${id}/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+    
+      const data = await response.json();
+      this.words = this.words.map((word) => (word.id === id ? data : word));
+    };
     
     // метод удаления слов
     deleteWord = async (id) => {

@@ -37,6 +37,8 @@ function CardSlider({wordsStore}) {
     
     function showPrevious() {
         position === 0 ? setPosition(words.length-1) : setPosition(position-1)
+        setSelected(false);
+        setShowRussian(false);
     }
     
     function showNext() {
