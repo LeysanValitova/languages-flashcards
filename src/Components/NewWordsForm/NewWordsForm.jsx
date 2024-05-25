@@ -11,34 +11,21 @@ function NewWords({wordsStore}) {
   const [english, setEnglish] = useState("");
   const [transcription, setTranscription] = useState("");
   const [russian, setRussian] = useState("");
+  const [error, setError] = useState(null)
 
-  const handleAddWord = (event) => {
-    event.preventDefault();
-    const newWord = { english, transcription, russian };
-    // console.log(newWord);
-    handleAdd(newWord);
-    setEnglish("");
-    setTranscription("");
-    setRussian("");
+  const handleAddWord = async (event) => {
+    try{
+      event.preventDefault();
+      const newWord = { english, transcription, russian };
+      handleAdd(newWord);
+      setEnglish("");
+      setTranscription("");
+      setRussian("");
+    } catch(error) {
+      setError('Произошла ошибка при запросе на сервер')
+    }
   };
 
-
-  // const handleAddWord = (e) => {
-  // e.preventDefault();
-
-  //   handleAdd(value)
-  //   setValue('');
-  //   console.log(value)
-  // }
-
-  // const handleChange = (e) => {
-  //   const { name, value: newWord } = e.target;
-  //   console.log(name, newWord);
-  //   setValue({
-  //   ...value,
-  //   [name]: newWord,
-  //   });
-  //   }
 
   return (
     <form className={styles.form} >

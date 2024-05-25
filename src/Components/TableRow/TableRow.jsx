@@ -6,6 +6,7 @@ import ButtonStyles from '../Button/Button.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { inject, observer } from 'mobx-react'
+import ErrorComponent from '../ErrorComponent/Error';
 
 
 
@@ -22,12 +23,19 @@ function TableRow({rowData, wordsStore}) {
     transcription,
     russian,
   });
+  
   // валидация
   const [errors, setErrors] =useState({
     english: false,
     transcription:false,
     russian:false,
+    serverError: null
   })
+
+   // метод для сброса ошибки
+      const clearError = () => {
+         setErrors(errors => ({ ...errors, serverError: null }))
+      }
 
   const disabledBtn = Object.values(errors).some((item) => item)
 
@@ -37,10 +45,18 @@ function TableRow({rowData, wordsStore}) {
     setValue({ ...rowData });
   }
   
-  const handleUpdateWord = (updatedWord) => {
-    console.log(updatedWord);
-    updateWord(updatedWord);
+  const handleUpdateWord = async (updatedWord) => {
+    try {
+      await updateWord(updatedWord);
+    } catch (error) {
+      console.error('Error while updating word:', error);
+      setErrors(errors => ({
+        ...errors,
+        serverError: 'Произошла ошибка при запросе на сервер'
+      }));
+    }
   };
+  
 
 // сохранение отредактированной формы
   function handleCheck() {
@@ -57,9 +73,16 @@ function TableRow({rowData, wordsStore}) {
     }
   }
 
-  function handleSave() {
-    handleUpdateWord(value)
-    handleCheck()
+  async function handleSave() {
+    try {
+      await handleUpdateWord(value);
+      handleCheck();
+    } catch (error) {
+      setErrors(errors => ({
+        ...errors,
+        serverError: 'Произошла ошибка при запросе на сервер'
+      }));
+    }
   }
 
 
@@ -81,14 +104,21 @@ function TableRow({rowData, wordsStore}) {
 
 
   // удаление слова
-  const handleDeleteWord = (id) => {
-    deleteWord(id);
+  const handleDeleteWord = async (id) => {
+    try {
+      await deleteWord(id);
+    } catch (error) {
+      console.error('Error while deleting word:', error);
+      setErrors(errors => ({
+        ...errors,
+        serverError: 'Произошла ошибка при запросе на сервер'
+      }));
+    }
   };
 
   return isSelected ? (
-    <tr>
-
-      
+   
+    <tr>     
         <td>{id}</td>
     
 
@@ -133,6 +163,7 @@ function TableRow({rowData, wordsStore}) {
             className={ButtonStyles.buttonOk}
             onClick={handleSave}
             disabled={disabledBtn}/>
+            {/* {<ErrorComponent error={errors.serverError} clearError={() => setErrors(clearError)} />} */}
             <Button
             className={ButtonStyles.buttonCansel}
             icon={<FontAwesomeIcon icon={faXmark} size='lg'/>}
@@ -159,6 +190,7 @@ function TableRow({rowData, wordsStore}) {
           className={ButtonStyles.buttonDelete}
           onClick={() => handleDeleteWord(id)}
           />
+          {/* {errors.serverError && <ErrorComponent error={errors.serverError} clearError={() => setErrors(clearError)} />} */}
         </td>
       </td>
     </tr>

@@ -1,6 +1,6 @@
 import './App.css';
-import Main from './screens/Main';
-import Game from './screens/Game';
+import Main from './pages/Main';
+import Game from './pages/Game';
 import Missing from './Components/Missing/Missing';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import WordsStore from './stores/words';
@@ -16,7 +16,7 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path='/table' element={<Main/>}></Route>
+          <Route path='/' element={<Main/>}></Route>
           <Route path='/game' element={<Game/>}></Route>
           <Route path='*' element={<Missing/>}>
         </Route>
