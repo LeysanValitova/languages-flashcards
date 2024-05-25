@@ -163,7 +163,7 @@ function TableRow({rowData, wordsStore}) {
             className={ButtonStyles.buttonOk}
             onClick={handleSave}
             disabled={disabledBtn}/>
-            {/* {<ErrorComponent error={errors.serverError} clearError={() => setErrors(clearError)} />} */}
+            {errors.serverError && <ErrorComponent error = {errors.serverError} clearError={() => setErrors(clearError)} />} 
             <Button
             className={ButtonStyles.buttonCansel}
             icon={<FontAwesomeIcon icon={faXmark} size='lg'/>}
@@ -190,7 +190,7 @@ function TableRow({rowData, wordsStore}) {
           className={ButtonStyles.buttonDelete}
           onClick={() => handleDeleteWord(id)}
           />
-          {/* {errors.serverError && <ErrorComponent error={errors.serverError} clearError={() => setErrors(clearError)} />} */}
+          {/* {{errors.serverError && <ErrorComponent error={errors.serverError} clearError={() => setErrors(clearError)} />}} */}
         </td>
       </td>
     </tr>

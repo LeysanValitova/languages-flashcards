@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ErrorComponent = ({ error, ClearError }) => {
+const ErrorComponent = ({ error, сlearError }) => {
     return (
         <div>
             <h3>Error: {error}</h3>
-            <button onClick={ClearError}>Close</button>
+            <button onClick={сlearError}>Close</button>
         </div>
     );
 }

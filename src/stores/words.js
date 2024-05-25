@@ -76,7 +76,7 @@ class WordsStore {
         tags_json: ''
       };
 
-      const response = await fetch(`/api/words/${id}/update`, {
+      const response = await fetch(`/сердечкоapi/words/${id}/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
