@@ -6,7 +6,7 @@ import ButtonStyles from '../Button/Button.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { inject, observer } from 'mobx-react'
-import ErrorComponent from '../ErrorComponent/Error';
+
 
 
 
@@ -14,7 +14,7 @@ import ErrorComponent from '../ErrorComponent/Error';
 function TableRow({rowData, wordsStore}) {
   const { id, english, transcription, russian} = rowData;
 
-  const {deleteWord, updateWord} = wordsStore;
+  const {deleteWord, updateWord, setError} = wordsStore;
 
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({
@@ -28,14 +28,9 @@ function TableRow({rowData, wordsStore}) {
   const [errors, setErrors] =useState({
     english: false,
     transcription:false,
-    russian:false,
-    serverError: null
+    russian:false
   })
 
-   // метод для сброса ошибки
-      const clearError = () => {
-         setErrors(errors => ({ ...errors, serverError: null }))
-      }
 
   const disabledBtn = Object.values(errors).some((item) => item)
 
@@ -48,12 +43,8 @@ function TableRow({rowData, wordsStore}) {
   const handleUpdateWord = async (updatedWord) => {
     try {
       await updateWord(updatedWord);
-    } catch (error) {
-      console.error('Error while updating word:', error);
-      setErrors(errors => ({
-        ...errors,
-        serverError: 'Произошла ошибка при запросе на сервер'
-      }));
+    }catch (error) {
+     setError('Failed to update the word'); // Установка текста ошибки в сторе
     }
   };
   
@@ -73,16 +64,11 @@ function TableRow({rowData, wordsStore}) {
     }
   }
 
-  async function handleSave() {
-    try {
-      await handleUpdateWord(value);
+   function handleSave() {
+   
+       handleUpdateWord(value);
       handleCheck();
-    } catch (error) {
-      setErrors(errors => ({
-        ...errors,
-        serverError: 'Произошла ошибка при запросе на сервер'
-      }));
-    }
+    
   }
 
 
@@ -108,12 +94,8 @@ function TableRow({rowData, wordsStore}) {
     try {
       await deleteWord(id);
     } catch (error) {
-      console.error('Error while deleting word:', error);
-      setErrors(errors => ({
-        ...errors,
-        serverError: 'Произошла ошибка при запросе на сервер'
-      }));
-    }
+      setError('Failed to delete the word'); 
+     }
   };
 
   return isSelected ? (
@@ -162,8 +144,7 @@ function TableRow({rowData, wordsStore}) {
             icon = {<FontAwesomeIcon icon={faCheck} size='lg' />}
             className={ButtonStyles.buttonOk}
             onClick={handleSave}
-            disabled={disabledBtn}/>
-            {errors.serverError && <ErrorComponent error = {errors.serverError} clearError={() => setErrors(clearError)} />} 
+            disabled={disabledBtn}/> 
             <Button
             className={ButtonStyles.buttonCansel}
             icon={<FontAwesomeIcon icon={faXmark} size='lg'/>}
@@ -190,7 +171,6 @@ function TableRow({rowData, wordsStore}) {
           className={ButtonStyles.buttonDelete}
           onClick={() => handleDeleteWord(id)}
           />
-          {/* {{errors.serverError && <ErrorComponent error={errors.serverError} clearError={() => setErrors(clearError)} />}} */}
         </td>
       </td>
     </tr>
