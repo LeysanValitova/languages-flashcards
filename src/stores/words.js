@@ -6,21 +6,21 @@ class WordsStore {
     words = [];
     isLoaded = false;
     isLoading = false;
-    // error = '';
+    error = '';
 
     constructor() {
         makeAutoObservable(this)
     }
     
-      //   // метод для установки ошибки
-      //   setError = (errorMessage) => {
-      //     this.error = errorMessage;
-      // }
+        // метод для установки ошибки
+        setError = (errorMessage) => {
+          this.error = errorMessage;
+      }
   
-      // // метод для сброса ошибки
-      // clearError = () => {
-      //     this.error = '';
-      // }
+      // метод для сброса ошибки
+      clearError = () => {
+          this.error = '';
+      }
 
 
     // метод для получения слов с сервера
@@ -43,7 +43,7 @@ class WordsStore {
   // метод отправки новых слов
   handleAdd = async (newWord) => {
     try {
-      const response = await fetch("/api/words/add", {
+      const response = await fetch("/fffapi/words/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

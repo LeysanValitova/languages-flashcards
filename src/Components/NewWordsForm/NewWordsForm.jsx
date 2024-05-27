@@ -6,25 +6,28 @@ import { inject, observer } from 'mobx-react'
 
 
 function NewWords({wordsStore}) {
-  const  {handleAdd} = wordsStore;
+  const  {handleAdd,setError} = wordsStore;
 
   const [english, setEnglish] = useState("");
   const [transcription, setTranscription] = useState("");
   const [russian, setRussian] = useState("");
-  const [error, setError] = useState(null)
+ 
 
   const handleAddWord = async (event) => {
-    try{
-      event.preventDefault();
+    event.preventDefault();
+    
+    try {
       const newWord = { english, transcription, russian };
-      handleAdd(newWord);
+      await handleAdd(newWord);
       setEnglish("");
       setTranscription("");
       setRussian("");
-    } catch(error) {
-      setError('Произошла ошибка при запросе на сервер')
+    } catch (error) {
+      console.error("Error while adding a new word:", error);
+      setError("Error while adding a new word");
     }
-  };
+  }
+  
 
 
   return (
