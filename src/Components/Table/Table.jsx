@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react'
-import styles from './Table.module.css'
-import TableRow from '../TableRow/TableRow'
-import { inject, observer } from 'mobx-react'
-import ErrorComponent from '../ErrorComponent/Error';
-
+import React, { useEffect, useRef } from "react";
+import styles from "./Table.module.css";
+import TableRow from "../TableRow/TableRow";
+import { inject, observer } from "mobx-react";
+import ErrorComponent from "../ErrorComponent/Error";
 
 function Table({ wordsStore }) {
   const { words, loadData, error, setError, clearError } = wordsStore;
@@ -15,7 +14,7 @@ function Table({ wordsStore }) {
         await loadData();
         isLoaded.current = true;
       } catch (error) {
-        setError('Failed to load data from the server');
+        setError("Failed to load data from the server");
         isLoaded.current = true;
       }
     };
@@ -50,4 +49,4 @@ function Table({ wordsStore }) {
   );
 }
 
-export default inject('wordsStore')(observer(Table));
+export default inject("wordsStore")(observer(Table));
